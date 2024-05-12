@@ -24,7 +24,7 @@ sudo ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 # .profile
 echo "
 # OhMyPosh Theme
-eval \"$(oh-my-posh init bash --config ~/Templates/ohMyPosh_Themes/tokyonight_storm.omp.json)\"
+eval \"\$(oh-my-posh init bash --config ~/ohmyposh/tokyonight_storm.omp.json)\"
 
 # custom aliases
 alias ll=\"lsd -ltrh\"
@@ -38,7 +38,7 @@ alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
-" >>~/.profile
+" >> ~/.profile
 
 # lazygit
 wget https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S
@@ -46,6 +46,7 @@ sudo tar -xvzf ~/temp/lazygit.tar.gz -C ~/temp
 sudo apt-get install ~/temp/lazygit
 
 rm -rf ~/temp
+
 # lazyvim
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
