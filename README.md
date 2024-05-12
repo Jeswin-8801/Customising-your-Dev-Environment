@@ -1,8 +1,5 @@
 # Customising-your-Dev-Environment
-A simple beginner-friendly custom terminal setup.
-<br>
-Feel free to use and edit this config as you see fit.
-Will be adding further upgrades to the terminal and lazyvim in the future.
+A simple beginner-friendly modern terminal setup.
 
 ## Run
 run the script setup.sh in WSL or a Linux system.
