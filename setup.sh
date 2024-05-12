@@ -45,6 +45,7 @@ wget https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_
 sudo tar -xvzf ~/temp/lazygit.tar.gz -C ~/temp
 sudo apt-get install ~/temp/lazygit
 
+rm -rf ~/temp
 # lazyvim
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
