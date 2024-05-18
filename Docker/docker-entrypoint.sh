@@ -60,7 +60,11 @@ if [[ \$- =~ .*i.* ]]; then bind '\"\C-xk\": \"\C-a hstr -k \C-j\"'; fi
 " >>$HOME/.bashrc
 
 echo "
+[credential]
+    helper = store
+
 [core]
+    editor = nvim
     pager = delta
 
 [interactive]
@@ -68,10 +72,24 @@ echo "
 
 [delta]
     navigate = true    # use n and N to move between diff sections
+    side-by-side = true
+    line-numbers = true
+    true-color = always
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
     # light = true
+
+    minus-style = syntax "#450a15"
+    minus-emph-style = syntax "#ff0000"
+    plus-style = syntax "#003000"
+    plus-emph-style = syntax "#028134"
+    hunk-header-style = syntax
+    file-style = yellow
+    file-decoration-style = yellow ul
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
 
 [merge]
     conflictstyle = diff3
@@ -89,6 +107,20 @@ echo "
     lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
     lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 " >>$HOME/.gitconfig
+
+echo "
+git:
+  paging:
+    useConfig: false
+    pager: delta --dark --paging=never
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true # automatic WYSIWYG wrapping of the commit message as you type
+    autoWrapWidth: 72 # if autoWrapCommitMessage is true, the width to wrap to
+  merging:
+    # extra args passed to \`git merge\`, e.g. --no-ff
+    args: \"--no-ff\"
+" >>$HOME/.config/lazygit/config.yml
 
 touch $HOME/.tldrrc
 echo "
@@ -113,8 +145,6 @@ echo "
 curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf -
 bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source ~/.local/share/blesh/ble.sh' >>~/.bashrc
-
-mkdir -p ~/.config
 
 # lazyvim
 git clone https://github.com/LazyVim/starter $HOME/.config/nvim
