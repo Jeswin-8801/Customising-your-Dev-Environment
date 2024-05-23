@@ -21,13 +21,25 @@ SSH into the container
 
 _**NOTE:** change the username and password in Dockerfile to the one you prefer_
 
-### 🚀🚀🚀
+_In case you get the following error_
+
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+```
+
+_run_
+
+- `ssh-keygen -f "/home/jeswins/.ssh/known_hosts" -R "[127.0.0.1]:2200"`
+
+## 🚀🚀🚀
 
 ![image](https://github.com/Jeswin-8801/Customising-your-Dev-Environment/assets/169489768/988716bd-3037-4f6c-8b6a-f384170f6a3e)
 
-### Lazyvim 🔥🔥
+## Lazyvim 🔥🔥
 
-![image](https://github.com/Jeswin-8801/Customising-your-Dev-Environment/assets/169489768/1166943c-5de8-4c4a-ba86-e6ce9f15917f)
+![image](assets/2024-05-23-14-36-22.png)
 
 # Want the same customisation for your local terminal?
 
