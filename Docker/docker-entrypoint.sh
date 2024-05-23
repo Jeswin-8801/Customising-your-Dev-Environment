@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # installs NVM (Node Version Manager)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash -s
+curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash -s
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
@@ -15,9 +15,9 @@ npm install -g tldr
 mkdir -p $HOME/downloads
 
 # OhMyPosh setup
-wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.29.0/posh-linux-amd64 -P $HOME/ohmyposh -S
+wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.29.0/posh-linux-amd64 -P $HOME/ohmyposh -S
 chmod +x $HOME/ohmyposh/posh-linux-amd64
-wget https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/tokyonight_storm.omp.json -P $HOME/ohmyposh
+wget -q https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/tokyonight_storm.omp.json -P $HOME/ohmyposh
 
 echo "
 alias ll=\"lsd -alhtr\"
@@ -26,6 +26,7 @@ alias tree=\"lsd --tree -lhtr --depth\"
 alias fd=\"fdfind\"
 alias bat=\"batcat\"
 alias man=\"tldr\"
+alias wget=\"wget --progress=dot\"
 alias c=\"clear\"
 alias cls=\"clear\"
 alias ..='cd ..'
@@ -80,15 +81,15 @@ echo "
     # dark = true
     # light = true
 
-    minus-style = syntax "#450a15"
-    minus-emph-style = syntax "#ff0000"
-    plus-style = syntax "#003000"
-    plus-emph-style = syntax "#028134"
+    minus-style = syntax \"#450a15\"
+    minus-emph-style = syntax \"#ff0000\"
+    plus-style = syntax \"#004010\"
+    plus-emph-style = syntax \"#028134\"
     hunk-header-style = syntax
     file-style = yellow
     file-decoration-style = yellow ul
 
-[delta "interactive"]
+[delta \"interactive\"]
     keep-plus-minus-markers = false
 
 [merge]
@@ -147,7 +148,7 @@ bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source ~/.local/share/blesh/ble.sh' >>~/.bashrc
 
 # lazyvim
-git clone https://github.com/Jeswin-8801/My-Neovim-Config.git $HOME/.config/nvim
+git clone https://github.com/Jeswin-8801/My-Neovim-Config $HOME/.config/nvim
 rm -rf $HOME/.config/nvim/.git
 
 # --------------------------------------------------------------------------------------

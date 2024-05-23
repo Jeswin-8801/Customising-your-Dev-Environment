@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:24.04
 
 LABEL maintainer="Jeswin Santosh jeswin.santosh@outlook.com"
 
@@ -11,8 +11,8 @@ ENV HOME /home/${user}
 RUN apt-get update && \
   apt-get install -y \
   build-essential \
-  vim git \
-  wget curl hstr fd-find fzf bat \
+  vim git sudo \
+  wget curl hstr fd-find fzf bat python3-pip \
   openssh-server
 
 # for delta
@@ -34,7 +34,7 @@ SHELL ["/bin/bash", "-c"]
 
 # lsd
 RUN mkdir -p ~/temp && \
-  wget https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb -O ~/temp/lsd.deb -S && \
+  wget -q https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb -O ~/temp/lsd.deb -S && \
   dpkg -i ~/temp/lsd.deb
 
 # nnn
@@ -46,24 +46,25 @@ RUN git clone https://github.com/jarun/nnn.git /opt/nnn && \
   export NNN_COLORS='#0a1b2c3d;1234'
 
 # neovim
-RUN wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz -O ~/temp/nvim.tar.gz -S && \
+RUN wget -q https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz -O ~/temp/nvim.tar.gz -S && \
   tar -xzf ~/temp/nvim.tar.gz -C /opt/ && \
   ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 
 # lazygit
-RUN wget https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S && \
-  tar -xvzf ~/temp/lazygit.tar.gz -C /opt/ && \
-  ln -s /opt/lazygit /usr/local/bin/lazygit
+RUN wget -q https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S && \
+  mkdir /opt/lazygit && \
+  tar -xzf ~/temp/lazygit.tar.gz -C /opt/lazygit && \
+  ln -s /opt/lazygit/lazygit /usr/local/bin/lazygit
 
 # delta
-RUN wget https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb -O ~/temp/delta.deb && \
+RUN wget -q https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb -O ~/temp/delta.deb && \
   dpkg -i ~/temp/delta.deb
 
 # glow
 RUN mkdir -p /etc/apt/keyrings && \
   curl -fsSL https://repo.charm.sh/apt/gpg.key | gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
   echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | tee /etc/apt/sources.list.d/charm.list && \
-  apt update && apt install glow
+  apt-get update && apt-get -y install glow
 
 SHELL ["/bin/sh", "-c"]
 
@@ -73,7 +74,7 @@ SHELL ["/bin/sh", "-c"]
 
 RUN touch /run/motd.dynamic.new && \
   chown $user /run/motd.dynamic.new && \
-  echo "cat /run/motd.dynamic.new\nservice --status-all" >> /etc/profile
+  printf "%s\n%s\n" "cat /run/motd.dynamic.new" "service --status-all" >> /etc/profile
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
