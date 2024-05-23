@@ -39,7 +39,7 @@ _run_
 
 ## Lazyvim 🔥🔥
 
-![image](assets/2024-05-23-14-36-22.png)
+![image](https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/assets/169489768/07ffd722-67e2-492f-a7bc-815447b12f02)
 
 # Want the same customisation for your local terminal?
 
