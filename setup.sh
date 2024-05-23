@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo apt update
 sudo apt full-upgrade
 sudo apt autoremove
@@ -48,5 +50,4 @@ sudo apt-get install ~/temp/lazygit
 rm -rf ~/temp
 
 # lazyvim
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
+git clone https://github.com/Jeswin-8801/My-Neovim-Config ~/.config/nvim
