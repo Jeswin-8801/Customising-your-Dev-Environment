@@ -61,6 +61,10 @@ if [[ \$- =~ .*i.* ]]; then bind '\"\C-xk\": \"\C-a hstr -k \C-j\"'; fi
 " >>$HOME/.bashrc
 
 echo "
+[user]
+    email = jeswin.santosh@outlook.com
+    name = Jeswin-8801
+
 [credential]
     helper = store
 
@@ -109,20 +113,6 @@ echo "
     lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 " >>$HOME/.gitconfig
 
-echo "
-git:
-  paging:
-    useConfig: false
-    pager: delta --dark --paging=never
-  commit:
-    signOff: false
-    autoWrapCommitMessage: true # automatic WYSIWYG wrapping of the commit message as you type
-    autoWrapWidth: 72 # if autoWrapCommitMessage is true, the width to wrap to
-  merging:
-    # extra args passed to \`git merge\`, e.g. --no-ff
-    args: \"--no-ff\"
-" >>$HOME/.config/lazygit/config.yml
-
 touch $HOME/.tldrrc
 echo "
 {
@@ -147,9 +137,23 @@ curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-night
 bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source ~/.local/share/blesh/ble.sh' >>~/.bashrc
 
+mkdir -p $HOME/.config/lazygit && touch $HOME/.config/lazygit/config.yml
+echo "
+git:
+  paging:
+    useConfig: false
+    pager: delta --dark --paging=never
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true # automatic WYSIWYG wrapping of the commit message as you type
+    autoWrapWidth: 72 # if autoWrapCommitMessage is true, the width to wrap to
+  merging:
+    # extra args passed to \`git merge\`, e.g. --no-ff
+    args: \"--no-ff\"
+" >>$HOME/.config/lazygit/config.yml
+
 # lazyvim
 git clone https://github.com/Jeswin-8801/My-Neovim-Config $HOME/.config/nvim
-rm -rf $HOME/.config/nvim/.git
 
 # --------------------------------------------------------------------------------------
 

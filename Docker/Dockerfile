@@ -51,7 +51,7 @@ RUN wget -q https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linu
   ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 
 # lazygit
-RUN wget -q https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S && \
+RUN wget -q https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Linux_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S && \
   mkdir /opt/lazygit && \
   tar -xzf ~/temp/lazygit.tar.gz -C /opt/lazygit && \
   ln -s /opt/lazygit/lazygit /usr/local/bin/lazygit
