@@ -147,7 +147,7 @@ bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source ~/.local/share/blesh/ble.sh' >>~/.bashrc
 
 # lazyvim
-git clone https://github.com/LazyVim/starter $HOME/.config/nvim
+git clone https://github.com/Jeswin-8801/My-Neovim-Config.git $HOME/.config/nvim
 rm -rf $HOME/.config/nvim/.git
 
 # --------------------------------------------------------------------------------------
