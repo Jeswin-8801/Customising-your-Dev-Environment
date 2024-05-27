@@ -35,11 +35,7 @@ _run_
 
 ## 🚀🚀🚀
 
-![image](https://github.com/Jeswin-8801/Customising-your-Dev-Environment/assets/169489768/988716bd-3037-4f6c-8b6a-f384170f6a3e)
-
-## Lazyvim 🔥🔥
-
-![image](https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/assets/169489768/07ffd722-67e2-492f-a7bc-815447b12f02)
+![image](https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/assets/169489768/703f25f2-2da8-47fb-929d-784f69ecee83)
 
 # Want the same customisation for your local terminal?
 
