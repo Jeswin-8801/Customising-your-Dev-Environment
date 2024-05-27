@@ -43,7 +43,7 @@ _run_
 
 # Want the same customisation for your local terminal?
 
-- run the script setup.sh in WSL or a Linux system.
+- run the script /terminal/setup.sh in WSL or a Linux system.
 
 `NOTE: In case you are running this in WSL, install the nerd fonts separately.`
 

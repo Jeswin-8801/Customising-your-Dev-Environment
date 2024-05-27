@@ -17,7 +17,7 @@ mkdir -p $HOME/downloads
 # OhMyPosh setup
 wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.29.0/posh-linux-amd64 -P $HOME/ohmyposh -S
 chmod +x $HOME/ohmyposh/posh-linux-amd64
-wget -q https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/blob/main/terminal/tokyonight_storm.omp.json -P $HOME/ohmyposh
+wget -q https://raw.githubusercontent.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/main/terminal/tokyonight_storm.omp.json -P $HOME/ohmyposh
 
 echo "
 alias ll=\"lsd -alhtr\"

@@ -31,7 +31,7 @@ mkdir -p ~/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O ~/temp/JetBrainsMono.zip -S
 unzip -f ~/temp/JetBrainsMono.zip -d ~/.fonts
 fc-cache -fv
-wget https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/blob/main/terminal/tokyonight_storm.omp.json -P ~/ohmyposh
+wget https://raw.githubusercontent.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/main/terminal/tokyonight_storm.omp.json -P ~/ohmyposh
 
 # neovim
 wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O ~/temp/nvim.tar.gz -S
