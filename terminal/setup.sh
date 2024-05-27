@@ -1,23 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
-# installs NVM (Node Version Manager)
-curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash -s
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+sudo apt update
+sudo apt full-upgrade
+sudo apt autoremove
 
-# download and install Node.js
-nvm install 20
+mkdir -p ~/temp
 
-# better man pages
-npm install -g tldr
+# lsd
+wget https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb -O ~/temp/lsd.deb -S
+sudo apt install -y ~/temp/lsd.deb
 
-mkdir -p $HOME/downloads
+# intsall other packages
+sudo apt install -y hstr bat python3-pip libreadline-dev pkg-config
 
-# OhMyPosh setup
-wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.29.0/posh-linux-amd64 -P $HOME/ohmyposh -S
-chmod +x $HOME/ohmyposh/posh-linux-amd64
-wget -q https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/blob/main/terminal/tokyonight_storm.omp.json -P $HOME/ohmyposh
+# nnn
+git clone https://github.com/jarun/nnn.git /opt/nnn
+rm -rf /opt/nnn/.git
+make --directory /opt/nnn O_EMOJI=1
+ln -s /opt/nnn/nnn /usr/local/bin/nnn
+export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
+export NNN_COLORS='#0a1b2c3d;1234'
+
+# delta
+wget -q https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb -O ~/temp/delta.deb
+dpkg -i ~/temp/delta.deb
+
+# oh my posh
+sudo curl -s https://ohmyposh.dev/install.sh | sudo bash -s
+mkdir -p ~/.fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O ~/temp/JetBrainsMono.zip -S
+unzip -f ~/temp/JetBrainsMono.zip -d ~/.fonts
+fc-cache -fv
+wget https://github.com/Jeswin-8801/Customising-your-Remote-Dev-Environment/blob/main/terminal/tokyonight_storm.omp.json -P ~/ohmyposh
+
+# neovim
+wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O ~/temp/nvim.tar.gz -S
+sudo tar -xvzf ~/temp/nvim.tar.gz -C /opt/
+sudo ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 
 echo "
 alias ll=\"lsd -alhtr\"
@@ -37,11 +56,11 @@ alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
-" >>$HOME/.bash_aliases
+" >>~/.bash_aliases
 
 echo "
 # OhMyPosh Theme
-eval \"\$($HOME/ohmyposh/posh-linux-amd64 init bash --config $HOME/ohmyposh/tokyonight_storm.omp.json)\"
+eval \"\$(~/ohmyposh/posh-linux-amd64 init bash --config ~/ohmyposh/tokyonight_storm.omp.json)\"
 
 # HSTR configuration
 alias hh=hstr                    # hh to be alias for hstr
@@ -58,7 +77,7 @@ history -n
 if [[ \$- =~ .*i.* ]]; then bind '\"\C-r\": \"\C-a hstr -- \C-j\"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ \$- =~ .*i.* ]]; then bind '\"\C-xk\": \"\C-a hstr -k \C-j\"'; fi
-" >>$HOME/.bashrc
+" >>~/.bashrc
 
 echo "
 [user]
@@ -111,9 +130,9 @@ echo "
     lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
     lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
     lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
-" >>$HOME/.gitconfig
+" >>~/.gitconfig
 
-touch $HOME/.tldrrc
+touch ~/.tldrrc
 echo "
 {
   \"pagesRepository\": \"https://github.com/tldr-pages/tldr\",
@@ -130,14 +149,14 @@ echo "
   },
   \"theme\": \"ocean\"
 }
-" >>$HOME/.tldrrc
+" >>~/.tldrrc
 
 # ble.sh
 curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf -
 bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source ~/.local/share/blesh/ble.sh' >>~/.bashrc
 
-mkdir -p $HOME/.config/lazygit && touch $HOME/.config/lazygit/config.yml
+mkdir -p ~/.config/lazygit && touch ~/.config/lazygit/config.yml
 echo "
 git:
   paging:
@@ -150,33 +169,14 @@ git:
   merging:
     # extra args passed to \`git merge\`, e.g. --no-ff
     args: \"--no-ff\"
-" >>$HOME/.config/lazygit/config.yml
+" >>~/.config/lazygit/config.yml
+
+# lazygit
+wget https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S
+sudo tar -xvzf ~/temp/lazygit.tar.gz -C ~/temp
+sudo apt-get install ~/temp/lazygit
+
+rm -rf ~/temp
 
 # lazyvim
-git clone https://github.com/Jeswin-8801/My-Neovim-Config $HOME/.config/nvim
-
-# --------------------------------------------------------------------------------------
-
-# ssh-keygen -A
-# https://www.ssh.com/academy/ssh/sshd#startup-and-roles-of-different-sshd-processes
-ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/ssh_host_rsa_key -N ""
-
-# Port 2200
-
-echo "HostKey $HOME/.ssh/ssh_host_rsa_key
-
-LogLevel INFO
-PasswordAuthentication yes
-PermitRootLogin no
-MaxSessions 2
-AllowTcpForwarding yes
-AllowStreamLocalForwarding yes
-GatewayPorts yes" >>$HOME/.ssh/sshd_config
-
-echo "----------------------------------- starting sshd"
-
-# view system logs => less /var/log/syslog
-
-mkdir -p $HOME/.ssh/log
-
-exec /usr/sbin/sshd -D -f $HOME/.ssh/sshd_config -E $HOME/.ssh/log/auth.log
+git clone https://github.com/Jeswin-8801/My-Neovim-Config ~/.config/nvim
