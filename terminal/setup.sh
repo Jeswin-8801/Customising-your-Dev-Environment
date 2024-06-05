@@ -22,7 +22,7 @@ export NNN_COLORS='#0a1b2c3d;1234'
 
 # delta
 wget -q https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb -O ~/temp/delta.deb
-dpkg -i ~/temp/delta.deb
+sudo dpkg -i ~/temp/delta.deb
 
 # oh my posh
 sudo curl -s https://ohmyposh.dev/install.sh | sudo bash -s
