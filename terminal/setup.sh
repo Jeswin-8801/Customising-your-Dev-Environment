@@ -1,7 +1,6 @@
 #!/bin/bash
 
 sudo apt update
-sudo apt full-upgrade
 sudo apt autoremove
 
 mkdir -p ~/temp
@@ -11,13 +10,13 @@ wget https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64
 sudo apt install -y ~/temp/lsd.deb
 
 # intsall other packages
-sudo apt install -y hstr bat python3-pip libreadline-dev pkg-config
+sudo apt install -y hstr bat python3-pip libreadline-dev pkg-config unzip
 
 # nnn
-git clone https://github.com/jarun/nnn.git /opt/nnn
-rm -rf /opt/nnn/.git
-make --directory /opt/nnn O_EMOJI=1
-ln -s /opt/nnn/nnn /usr/local/bin/nnn
+sudo git clone https://github.com/jarun/nnn.git /opt/nnn
+sudo rm -rf /opt/nnn/.git
+sudo make --directory /opt/nnn O_EMOJI=1
+sudo ln -s /opt/nnn/nnn /usr/local/bin/nnn
 export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
 export NNN_COLORS='#0a1b2c3d;1234'
 
@@ -60,7 +59,7 @@ alias .5='cd ../../../../../'
 
 echo "
 # OhMyPosh Theme
-eval \"\$(~/ohmyposh/posh-linux-amd64 init bash --config ~/ohmyposh/tokyonight_storm.omp.json)\"
+eval \"\$(oh-my-posh init bash --config ~/ohmyposh/tokyonight_storm.omp.json)\"
 
 # HSTR configuration
 alias hh=hstr                    # hh to be alias for hstr
@@ -172,9 +171,10 @@ git:
 " >>~/.config/lazygit/config.yml
 
 # lazygit
-wget https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_arm64.tar.gz -O ~/temp/lazygit.tar.gz -S
-sudo tar -xvzf ~/temp/lazygit.tar.gz -C ~/temp
-sudo apt-get install ~/temp/lazygit
+wget https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Linux_x86_64.tar.gz -O ~/temp/lazygit.tar.gz -S
+sudo mkdir /opt/lazygit
+sudo tar -xvzf ~/temp/lazygit.tar.gz -C /opt/lazygit
+sudo ln -s /opt/lazygit/lazygit /usr/local/bin/lazygit
 
 rm -rf ~/temp
 
