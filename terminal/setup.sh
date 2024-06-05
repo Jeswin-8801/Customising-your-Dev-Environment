@@ -10,7 +10,7 @@ wget https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64
 sudo apt install -y ~/temp/lsd.deb
 
 # intsall other packages
-sudo apt install -y hstr bat python3-pip libreadline-dev pkg-config unzip
+sudo apt install -y hstr bat python3-pip libreadline-dev pkg-config unzip npm
 
 # nnn
 sudo git clone https://github.com/jarun/nnn.git /opt/nnn
@@ -36,6 +36,9 @@ wget https://raw.githubusercontent.com/Jeswin-8801/Customising-your-Remote-Dev-E
 wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O ~/temp/nvim.tar.gz -S
 sudo tar -xvzf ~/temp/nvim.tar.gz -C /opt/
 sudo ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
+
+# tldr
+npm install -g tldr
 
 echo "
 alias ll=\"lsd -alhtr\"
